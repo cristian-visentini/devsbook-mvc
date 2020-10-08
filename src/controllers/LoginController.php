@@ -19,7 +19,7 @@ class LoginController extends Controller {
         }
 
 
-        $this->render('login', [
+        $this->render('signin', [
             'flash' => $flash
         ]);
 
@@ -55,9 +55,22 @@ class LoginController extends Controller {
     }
 
     public function singnup(){
-        echo "cadastro";
+         
+        $flash = '';
+        if(!empty($_SESSION['flash'])){
+            $flash = $_SESSION['flash'];
+            $_SESSION['flash'] = '';
+        }
+
+
+        $this->render('singnup', [
+            'flash' => $flash
+        ]);
         
     }
 
+    public function singnupAction(){
     
+    }
 }
+
