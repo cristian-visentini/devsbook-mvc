@@ -24,4 +24,19 @@ class LoginHandler{
         }
           return false;
     }
+
+    public static function VerifyLogin($Email, $Password){
+        $User = User::select()->where('email', $Email)->one();
+
+        if($User){
+            if(password_verify($Password, $User['password'])){
+                $Token = md5(time().rand(0, 9999).time());
+
+                User::update()->set('token', $Token)->where('email', $Email)->execute();
+                return $Token;
+            }
+            
+        }
+        return false;
+    }
 }
