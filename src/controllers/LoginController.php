@@ -70,6 +70,37 @@ class LoginController extends Controller {
     }
 
     public function singnupAction(){
+        $Email = filter_input(INPUT_POST, 'email', FILTER_VALIDATE_EMAIL);
+        $Password= filter_input(INPUT_POST, 'password');
+        $Name= filter_input(INPUT_POST, 'name');
+        $BirthDate= filter_input(INPUT_POST, 'birthdate');
+
+        if($Name && $Email && $Password && $BirthDate){
+            $BirthDate = explode('/', $BirthDate);
+            if(count($BirthDate) !=3){
+                $_SESSION['flash'] = 'Data de Nacimento Inválida';
+                $this->redirect('/cadastro');
+            }
+                $BirthDate = $BirthDate[2].'-'.$BirthDate[1].'-'.$BirthDate[0];
+
+                if(strtotime($BirthDate) === false){
+                    $_SESSION['flash'] = 'Data de Nacimento Inválida';
+                $this->redirect('/cadastro');
+                }
+
+                if(LoginHandler::EmailExists($Email) === false){
+                   $Token =  LoginHandler::AddUser($Name, $Email, $Password, $BirthDate);
+                   $_SESSION['token'] = $Token;
+                   $this->redirect('/');
+                }else{
+                    $_SESSION['flash'] = 'Email Já CAdastrado';
+                $this->redirect('/cadastro');
+                }
+            
+
+        }else{
+            $this->redirect('/cadastro');
+        }
     
     }
 }
