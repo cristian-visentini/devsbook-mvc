@@ -7,7 +7,7 @@ use \src\handlers\LoginHandler ; //as HandlersLoginHandler
 
 class LoginController extends Controller {
 
-    //private $LoggedUser;
+    private $LoggedUser;
 
     public function signin(){
 

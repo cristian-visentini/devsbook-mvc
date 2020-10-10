@@ -17,6 +17,7 @@ class LoginHandler{
                 $LoggedUser->Id = $Data['id'];
                 $LoggedUser->Email = $Data['email'];
                 $LoggedUser->Name = $Data['name'];
+                $LoggedUser->Avatar = $Data['avatar'];
 
                 return $LoggedUser;
 
