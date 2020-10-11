@@ -7,7 +7,7 @@
             <div class="row">
                 <div class="column pr-5">
 
-                   <?=$render('feed-editor');?>
+                   <?=$render('feed-editor', ['User'=>$LoggedUser]);?> 
 
                    <?=$render('feed-item');?>
 
@@ -28,7 +28,7 @@
                     </div>
                     <div class="box">
                         <div class="box-body m-10">
-                            Criado com ❤️ por B7Web
+                            Criado com ❤️ Cristian Visentini
                         </div>
                     </div>
                 </div>

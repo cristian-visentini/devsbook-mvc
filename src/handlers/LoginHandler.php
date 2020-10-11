@@ -55,7 +55,7 @@ class LoginHandler{
             'password' => $Hash,
             'name' => $Name,
             'birthdate' => $BirthDate,
-            'avatar' => 'defaeult.jpg',
+            'avatar' => 'default.jpg',
             'cover' => 'cover.jpg',
             'token' => $Token
         ])->execute();

@@ -23,6 +23,4 @@ class HomeController extends Controller {
             'LoggedUser' => $this->LoggedUser
         ]);
     }
-
-    
 }
