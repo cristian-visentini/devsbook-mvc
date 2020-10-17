@@ -9,7 +9,13 @@
 
                    <?=$render('feed-editor', ['User'=>$LoggedUser]);?> 
 
-                   <?=$render('feed-item');?>
+                   <?php foreach($Feed as $FeedItem): ?>
+                    <?=$render('feed-item', [
+                        'data' => $FeedItem
+                    ]);?>
+                   <?php endforeach; ?>
+
+                   
 
 
                 </div>
