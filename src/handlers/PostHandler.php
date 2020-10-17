@@ -21,7 +21,8 @@ class PostHandler{
 
     }
 
-    public static function GetHomeFeed($Id_User){
+    public static function GetHomeFeed($Id_User, $Page){
+        $PerPage = 2;
 
      //Pegar lista de usuarios que sigo
 
@@ -37,7 +38,11 @@ class PostHandler{
 
      // pegar posts ordenados por data
 
-     $PostList = Post::select()->where('id_user', 'in', $Users)->orderBy('created_at', 'desc')->get();
+     $PostList = Post::select()->where('id_user', 'in', $Users)->orderBy('created_at', 'desc')->page($Page, $PerPage)->get();
+
+     $Total = Post::select()->where('id_user', 'in', $Users)->count();
+
+     $PageCount = ceil($Total / $PerPage);
 
      // Transformar em objetos dos models
 
@@ -76,7 +81,11 @@ class PostHandler{
      }
 
      //retornar resultado
-     return $Posts;
+     return [
+         'Posts' => $Posts,
+        'PageCount' => $PageCount,
+        'CurrentPage' => $Page
+        ];
     }
 
 }
