@@ -49,6 +49,11 @@ class PostHandler{
         $NewPost->Type = $PostItem['type'];
         $NewPost->Created_At = $PostItem['created_at'];
         $NewPost->Body = $PostItem['body'];
+        $NewPost->Mine = false;
+
+        if($PostItem['id_user'] == $Id_User){
+            $NewPost->Mine = true;
+        }
 
         // Prencher informações adicionais nos posts
 
@@ -60,8 +65,13 @@ class PostHandler{
 
 
         //prencher informações de likes
+        $NewPost->LikeCount = 0;
+        $NewPost->Liked = false;
 
         //prencher informações de coments
+        $NewPost->Coments = [];
+
+
         $Posts[] = $NewPost;
      }
 

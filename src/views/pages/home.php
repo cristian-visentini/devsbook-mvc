@@ -11,7 +11,8 @@
 
                    <?php foreach($Feed as $FeedItem): ?>
                     <?=$render('feed-item', [
-                        'data' => $FeedItem
+                        'data' => $FeedItem,
+                        'LoggedUser' => $LoggedUser
                     ]);?>
                    <?php endforeach; ?>
 

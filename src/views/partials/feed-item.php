@@ -27,11 +27,12 @@
         <?= nl2br($data->Body); ?>
         </div>
         <div class="feed-item-buttons row mt-20 m-width-20">
-            <div class="like-btn on">56</div>
-            <div class="msg-btn">3</div>
+            <div class="like-btn <?=($data->Liked ? 'on' : '')?>"><?=$data->LikeCount;?></div>
+            <div class="msg-btn"><?=count($data->Coments);?></div>
         </div>
         <div class="feed-item-comments">
 
+        <!--
             <div class="fic-item row m-height-10 m-width-20">
                 <div class="fic-item-photo">
                     <a href=""><img src="media/avatars/avatar.jpg" /></a>
@@ -42,19 +43,12 @@
                 </div>
             </div>
 
-            <div class="fic-item row m-height-10 m-width-20">
-                <div class="fic-item-photo">
-                    <a href=""><img src="media/avatars/avatar.jpg" /></a>
-                </div>
-                <div class="fic-item-info">
-                    <a href="">Bonieky Lacerda</a>
-                    Muito legal, parabéns!
-                </div>
-            </div>
+            -->
+           
 
             <div class="fic-answer row m-height-10 m-width-20">
                 <div class="fic-item-photo">
-                    <a href=""><img src="media/avatars/avatar.jpg" /></a>
+                    <a href=""><img src="<?=$base;?>/media/avatars/<?=$LoggedUser->Avatar?>" /></a>
                 </div>
                 <input type="text" class="fic-item-field" placeholder="Escreva um comentário" />
             </div>
