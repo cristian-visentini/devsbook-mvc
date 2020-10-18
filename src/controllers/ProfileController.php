@@ -19,11 +19,15 @@ class ProfileController extends Controller {
     }
 
     public function index($Atts =[]) {
-
+        $id = $this->LoggedUser->Id;
+        
+        if(!empty($Atts['id'])){
+            $id = $Atts['id'];
+        }
        
         
         $this->render('profile',[
             'LoggedUser' => $this->LoggedUser
-            ]);
+        ]);
     }
 }

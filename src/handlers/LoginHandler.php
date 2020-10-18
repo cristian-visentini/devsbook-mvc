@@ -41,6 +41,11 @@ class LoginHandler{
         return false;
     }
 
+    public function IdlExists($Id){
+        $User = User::select()->where('id', $Id)->one();
+        return $User ? true : false;
+    }
+
     public function EmailExists($Email){
         $User = User::select()->where('email', $Email)->one();
         return $User ? true : false;
