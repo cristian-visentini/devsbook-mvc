@@ -19,15 +19,15 @@
                             </div>
                             <div class="profile-info-data row">
                                 <div class="profile-info-item m-width-20">
-                                    <div class="profile-info-item-n">129</div>
+                                    <div class="profile-info-item-n"><?=count($User->Followers);?></div>
                                     <div class="profile-info-item-s">Seguidores</div>
                                 </div>
                                 <div class="profile-info-item m-width-20">
-                                    <div class="profile-info-item-n">363</div>
+                                    <div class="profile-info-item-n"><?=count($User->Following);?></div>
                                     <div class="profile-info-item-s">Seguindo</div>
                                 </div>
                                 <div class="profile-info-item m-width-20">
-                                    <div class="profile-info-item-n">12</div>
+                                    <div class="profile-info-item-n"><?=count($User->Photos);?></div>
                                     <div class="profile-info-item-s">Fotos</div>
                                 </div>
                             </div>
@@ -69,92 +69,29 @@
                         <div class="box-header m-10">
                             <div class="box-header-text">
                                 Seguindo
-                                <span>(363)</span>
+                                <span><?=count($User->Following);?></span>
                             </div>
                             <div class="box-header-buttons">
                                 <a href="">ver todos</a>
                             </div>
                         </div>
                         <div class="box-body friend-list">
+
+                        <?php for($q=0; $q<9; $q++):?>
+                        <?php if(isset($User->Following[$q])):?>
+                            <div class="friend-icon">
+                                <a href="<?=$base;?>/perfil/<?=$User->Following[$q]->Id;?>">
+                                    <div class="friend-icon-avatar">
+                                        <img src="<?=$base;?>/media/avatars/<?=$User->Following[$q]->Avatar;?>" />
+                                    </div>
+                                    <div class="friend-icon-name">
+                                    <?=$User->Following[$q]->Name;?>
+                                    </div>
+                                </a>
+                            </div>
+                        <?php endif;?>
+                        <?php endfor;?>
                             
-                            <div class="friend-icon">
-                                <a href="">
-                                    <div class="friend-icon-avatar">
-                                        <img src="media/avatars/avatar.jpg" />
-                                    </div>
-                                    <div class="friend-icon-name">
-                                        Bonieky
-                                    </div>
-                                </a>
-                            </div>
-
-                            <div class="friend-icon">
-                                <a href="">
-                                    <div class="friend-icon-avatar">
-                                        <img src="media/avatars/avatar.jpg" />
-                                    </div>
-                                    <div class="friend-icon-name">
-                                        Bonieky
-                                    </div>
-                                </a>
-                            </div>
-
-                            <div class="friend-icon">
-                                <a href="">
-                                    <div class="friend-icon-avatar">
-                                        <img src="media/avatars/avatar.jpg" />
-                                    </div>
-                                    <div class="friend-icon-name">
-                                        Bonieky
-                                    </div>
-                                </a>
-                            </div>
-
-                            <div class="friend-icon">
-                                <a href="">
-                                    <div class="friend-icon-avatar">
-                                        <img src="media/avatars/avatar.jpg" />
-                                    </div>
-                                    <div class="friend-icon-name">
-                                        Bonieky
-                                    </div>
-                                </a>
-                            </div>
-
-                            <div class="friend-icon">
-                                <a href="">
-                                    <div class="friend-icon-avatar">
-                                        <img src="media/avatars/avatar.jpg" />
-                                    </div>
-                                    <div class="friend-icon-name">
-                                        Bonieky
-                                    </div>
-                                </a>
-                            </div>
-
-                            <div class="friend-icon">
-                                <a href="">
-                                    <div class="friend-icon-avatar">
-                                        <img src="media/avatars/avatar.jpg" />
-                                    </div>
-                                    <div class="friend-icon-name">
-                                        Bonieky
-                                    </div>
-                                </a>
-                            </div>
-
-                            <div class="friend-icon">
-                                <a href="">
-                                    <div class="friend-icon-avatar">
-                                        <img src="media/avatars/avatar.jpg" />
-                                    </div>
-                                    <div class="friend-icon-name">
-                                        Bonieky
-                                    </div>
-                                </a>
-                            </div>
-
-                        </div>
                     </div>
 
                 </div>
