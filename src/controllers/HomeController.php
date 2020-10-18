@@ -2,7 +2,7 @@
 namespace src\controllers;
 
 use \core\Controller;
-use \src\handlers\LoginHandler;
+use \src\handlers\UserHandler;
 use \src\handlers\PostHandler;
 
 class HomeController extends Controller {
@@ -10,7 +10,7 @@ class HomeController extends Controller {
     private $LoggedUser;
 
     public function __construct(){
-        $this->LoggedUser = LoginHandler::CheckLogin();
+        $this->LoggedUser = UserHandler::CheckLogin();
 
         if($this->LoggedUser === false){
             $this->redirect('/login');
