@@ -80,7 +80,7 @@ class UserHandler
 
                 //Followers
                 $Followers = UserRelation::select()->where('user_to', $id)->get();
-                foreach($Followers as $Follower){
+                foreach ($Followers as $Follower) {
                     $UserData = User::select()->where('id', $Follower['user_from'])->get();
                     $NewUser = new User();
                     $NewUser->Id = $UserData['id'];
@@ -92,7 +92,7 @@ class UserHandler
 
                 //Following
                 $Following = UserRelation::select()->where('user_from', $id)->get();
-                foreach($Following as $Follower){
+                foreach ($Following as $Follower) {
                     $UserData = User::select()->where('id', $Follower['user_from'])->get();
                     $NewUser = new User();
                     $NewUser->Id = $UserData['id'];
@@ -104,8 +104,6 @@ class UserHandler
 
                 //Photos
                 $User->Photos = PostHandler::GetPhotosFrom($id);
-
-
             }
 
             return $User;
@@ -128,5 +126,20 @@ class UserHandler
         ])->execute();
 
         return $Token;
+    }
+
+    public static function IsFollowing($From, $To)
+    {
+        $Data = UserRelation::select()
+            ->where('user_from', $From)
+            ->where('user_to', $To)
+        ->one();
+
+        if($Data){
+            return true;
+        }
+
+        return false;
+        
     }
 }
