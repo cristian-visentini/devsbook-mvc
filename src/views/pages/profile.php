@@ -95,6 +95,7 @@
                     </div>
 
                 </div>
+             </div>
                 <div class="column pl-5">
 
                     <div class="box">
@@ -186,8 +187,6 @@
 
 
                 </div>
-
-            </div>
 
     </section>
 </section>

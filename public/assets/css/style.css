@@ -349,6 +349,7 @@ header .head-side {
 }
 
 .user-photo-item {
+    max-width: 25%;
     margin-right:10px;
 }
 .user-photo-item:last-child {
