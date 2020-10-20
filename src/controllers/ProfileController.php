@@ -2,6 +2,7 @@
 namespace src\controllers;
 
 use \core\Controller;
+use DateTime;
 use \src\handlers\UserHandler;
 use \src\handlers\PostHandler;
 
@@ -30,6 +31,12 @@ class ProfileController extends Controller {
         if(!$User){
             $this->redirect('/');
         }
+
+        $DateFrom = new \DateTime($User->BirthDate);
+        $DateTo = new \DateTime('today');
+
+
+        $User->AgeYears = $DateFrom->diff($DateTo)->y;
         
         $this->render('profile',[
             'LoggedUser' => $this->LoggedUser,

@@ -5,93 +5,93 @@
 
     <section class="feed">
 
-            <div class="row">
-                <div class="box flex-1 border-top-flat">
-                    <div class="box-body">
-                        <div class="profile-cover" style="background-image: url('<?=$base;?>/media/covers/<?=$User->Cover;?>');"></div>
-                        <div class="profile-info m-20 row">
-                            <div class="profile-info-avatar">
-                                <img src="<?=$base;?>/media/avatars/<?=$User->Avatar;?>" />
+        <div class="row">
+            <div class="box flex-1 border-top-flat">
+                <div class="box-body">
+                    <div class="profile-cover" style="background-image: url('<?= $base; ?>/media/covers/<?= $User->Cover; ?>');"></div>
+                    <div class="profile-info m-20 row">
+                        <div class="profile-info-avatar">
+                            <img src="<?= $base; ?>/media/avatars/<?= $User->Avatar; ?>" />
+                        </div>
+                        <div class="profile-info-name">
+                            <div class="profile-info-name-text"><?= $User->Name; ?></div>
+                            <div class="profile-info-location"><?= $User->City; ?></div>
+                        </div>
+                        <div class="profile-info-data row">
+                            <div class="profile-info-item m-width-20">
+                                <div class="profile-info-item-n"><?= count($User->Followers); ?></div>
+                                <div class="profile-info-item-s">Seguidores</div>
                             </div>
-                            <div class="profile-info-name">
-                                <div class="profile-info-name-text"><?=$User->Name;?></div>
-                                <div class="profile-info-location"><?=$User->City;?></div>
+                            <div class="profile-info-item m-width-20">
+                                <div class="profile-info-item-n"><?= count($User->Following); ?></div>
+                                <div class="profile-info-item-s">Seguindo</div>
                             </div>
-                            <div class="profile-info-data row">
-                                <div class="profile-info-item m-width-20">
-                                    <div class="profile-info-item-n"><?=count($User->Followers);?></div>
-                                    <div class="profile-info-item-s">Seguidores</div>
-                                </div>
-                                <div class="profile-info-item m-width-20">
-                                    <div class="profile-info-item-n"><?=count($User->Following);?></div>
-                                    <div class="profile-info-item-s">Seguindo</div>
-                                </div>
-                                <div class="profile-info-item m-width-20">
-                                    <div class="profile-info-item-n"><?=count($User->Photos);?></div>
-                                    <div class="profile-info-item-s">Fotos</div>
-                                </div>
+                            <div class="profile-info-item m-width-20">
+                                <div class="profile-info-item-n"><?= count($User->Photos); ?></div>
+                                <div class="profile-info-item-s">Fotos</div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-            
-            <div class="row">
+        </div>
 
-                <div class="column side pr-5">
-                    
-                    <div class="box">
-                        <div class="box-body">
-                            
+        <div class="row">
+
+            <div class="column side pr-5">
+
+                <div class="box">
+                    <div class="box-body">
+
+                        <div class="user-info-mini">
+                            <img src="<?= $base; ?>/assets/images/calendar.png" />
+                            <?= date('d/m/Y', strtotime($User->BirthDate)); ?>(<?= $User->AgeYears ?> anos)
+                        </div>
+
+                        <?php if (!empty($User->City)) : ?>
                             <div class="user-info-mini">
-                                <img src="<?=$base;?>/assets/images/calendar.png" />
-                                01/01/1930 (90 anos)
+                                <img src="<?= $base; ?>/assets/images/pin.png" />
+                                <?= $User->City; ?>
                             </div>
+                        <?php endif; ?>
 
-                            <?php if(!empty($User->City)):?>
+                        <?php if (!empty($User->Work)) : ?>
                             <div class="user-info-mini">
-                                <img src="<?=$base;?>/assets/images/pin.png" />
-                                <?=$User->City;?>
+                                <img src="<?= $base; ?>/assets/images/work.png" />
+                                <?= $User->Work; ?>
                             </div>
-                            <?php endif;?>
+                        <?php endif; ?>
 
-                            <?php if(!empty($User->Work)):?>
-                            <div class="user-info-mini">
-                                <img src="<?=$base;?>/assets/images/work.png" />
-                                <?=$User->Work;?>
-                            </div>
-                            <?php endif;?>
+                    </div>
+                </div>
 
+                <div class="box">
+                    <div class="box-header m-10">
+                        <div class="box-header-text">
+                            Seguindo
+                            <span><?= count($User->Following); ?></span>
+                        </div>
+                        <div class="box-header-buttons">
+                            <a href="">ver todos</a>
                         </div>
                     </div>
+                    <div class="box-body friend-list">
 
-                    <div class="box">
-                        <div class="box-header m-10">
-                            <div class="box-header-text">
-                                Seguindo
-                                <span><?=count($User->Following);?></span>
-                            </div>
-                            <div class="box-header-buttons">
-                                <a href="">ver todos</a>
-                            </div>
-                        </div>
-                        <div class="box-body friend-list">
+                        <?php for ($q = 0; $q < 9; $q++) : ?>
+                            <?php if (isset($User->Following[$q])) : ?>
+                                <div class="friend-icon">
+                                    <a href="<?= $base; ?>/perfil/<?= $User->Following[$q]->Id; ?>">
+                                        <div class="friend-icon-avatar">
+                                            <img src="<?= $base; ?>/media/avatars/<?= $User->Following[$q]->Avatar; ?>" />
+                                        </div>
+                                        <div class="friend-icon-name">
+                                            <?= $User->Following[$q]->Name; ?>
+                                        </div>
+                                    </a>
+                                </div>
+                            <?php endif; ?>
+                        <?php endfor; ?>
 
-                        <?php for($q=0; $q<9; $q++):?>
-                        <?php if(isset($User->Following[$q])):?>
-                            <div class="friend-icon">
-                                <a href="<?=$base;?>/perfil/<?=$User->Following[$q]->Id;?>">
-                                    <div class="friend-icon-avatar">
-                                        <img src="<?=$base;?>/media/avatars/<?=$User->Following[$q]->Avatar;?>" />
-                                    </div>
-                                    <div class="friend-icon-name">
-                                    <?=$User->Following[$q]->Name;?>
-                                    </div>
-                                </a>
-                            </div>
-                        <?php endif;?>
-                        <?php endfor;?>
-                            
                     </div>
 
                 </div>
@@ -101,50 +101,28 @@
                         <div class="box-header m-10">
                             <div class="box-header-text">
                                 Fotos
-                                <span>(12)</span>
+                                <span><?= count($User->Photos); ?></span>
                             </div>
                             <div class="box-header-buttons">
                                 <a href="">ver todos</a>
                             </div>
                         </div>
                         <div class="box-body row m-20">
-                            
-                            <div class="user-photo-item">
-                                <a href="#modal-1" rel="modal:open">
-                                    <img src="media/uploads/1.jpg" />
-                                </a>
-                                <div id="modal-1" style="display:none">
-                                    <img src="media/uploads/1.jpg" />
-                                </div>
-                            </div>
 
-                            <div class="user-photo-item">
-                                <a href="#modal-2" rel="modal:open">
-                                    <img src="media/uploads/1.jpg" />
-                                </a>
-                                <div id="modal-2" style="display:none">
-                                    <img src="media/uploads/1.jpg" />
-                                </div>
-                            </div>
+                        <?php for ($q = 0; $q < 4; $q++) : ?>
+                                <?php if (isset($User->Photos[$q])) : ?>
+                                    <div class="user-photo-item">
+                                        <a href="#modal-<?= $User->Photos[$q]->Id; ?>" rel="modal:open">
+                                            <img src="<?= $base; ?>/media/uploads/<?= $User->Photos[$q]->Body; ?>" />
+                                        </a>
+                                        <div id="modal-<?= $User->Photos[$q]->Id; ?>" style="display:none">
+                                            <img src="<?= $base; ?>/media/uploads/<?= $User->Photos[$q]->Body; ?>" />
+                                        </div>
+                                    </div>
 
-                            <div class="user-photo-item">
-                                <a href="#modal-3" rel="modal:open">
-                                    <img src="media/uploads/1.jpg" />
-                                </a>
-                                <div id="modal-3" style="display:none">
-                                    <img src="media/uploads/1.jpg" />
-                                </div>
-                            </div>
+                                <?php endif; ?>
+                            <?php endfor; ?>
 
-                            <div class="user-photo-item">
-                                <a href="#modal-4" rel="modal:open">
-                                    <img src="media/uploads/1.jpg" />
-                                </a>
-                                <div id="modal-4" style="display:none">
-                                    <img src="media/uploads/1.jpg" />
-                                </div>
-                            </div>
-                            
                         </div>
                     </div>
 
@@ -157,7 +135,7 @@
                                 <div class="feed-item-head-info">
                                     <a href=""><span class="fidi-name">Bonieky Lacerda</span></a>
                                     <span class="fidi-action">fez um post</span>
-                                    <br/>
+                                    <br />
                                     <span class="fidi-date">07/03/2020</span>
                                 </div>
                                 <div class="feed-item-head-btn">
@@ -165,8 +143,8 @@
                                 </div>
                             </div>
                             <div class="feed-item-body mt-10 m-width-20">
-                                Pessoal, tudo bem! Busco parceiros para empreender comigo em meu software.<br/><br/>
-                                Acabei de aprová-lo na Appstore. É um sistema de atendimento via WhatsApp multi-atendentes para auxiliar empresas.<br/><br/>
+                                Pessoal, tudo bem! Busco parceiros para empreender comigo em meu software.<br /><br />
+                                Acabei de aprová-lo na Appstore. É um sistema de atendimento via WhatsApp multi-atendentes para auxiliar empresas.<br /><br />
                                 Este sistema permite que vários funcionários/colaboradores da empresa atendam um mesmo número de WhatsApp, mesmo que estejam trabalhando remotamente, sendo que cada um acessa com um login e senha particular....
                             </div>
                             <div class="feed-item-buttons row mt-20 m-width-20">
@@ -174,7 +152,7 @@
                                 <div class="msg-btn">3</div>
                             </div>
                             <div class="feed-item-comments">
-                                
+
                                 <div class="fic-item row m-height-10 m-width-20">
                                     <div class="fic-item-photo">
                                         <a href=""><img src="media/avatars/avatar.jpg" /></a>
@@ -208,10 +186,10 @@
 
 
                 </div>
-                
+
             </div>
 
-        </section>
+    </section>
 </section>
 
 <?= $render('footer'); ?>
