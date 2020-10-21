@@ -13,6 +13,7 @@ $router->post('/cadastro', 'LoginController@singnupAction');
 
 $router->post('/post/new', 'PostController@new');
 
+$router->get('/perfil/{id}/follow', 'ProfileController@Follow');
 $router->get('/perfil/{id}', 'ProfileController@index');
 $router->get('/perfil', 'ProfileController@index');
 $router->get('/sair', 'LoginController@Logout');

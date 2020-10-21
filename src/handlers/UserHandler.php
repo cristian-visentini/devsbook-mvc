@@ -47,7 +47,7 @@ class UserHandler
         return false;
     }
 
-    public function IdlExists($Id)
+    public function IdExists($Id)
     {
         $User = User::select()->where('id', $Id)->one();
         return $User ? true : false;
@@ -81,11 +81,14 @@ class UserHandler
                 //Followers
                 $Followers = UserRelation::select()->where('user_to', $id)->get();
                 foreach ($Followers as $Follower) {
-                    $UserData = User::select()->where('id', $Follower['user_from'])->get();
+                    $UserData = User::select()->where('id', $Follower['user_from'])->one();
+                    
                     $NewUser = new User();
-                    $NewUser->Id = $UserData['id'];
+                   
+                    $NewUser->Id = $UserData['id']; // o erro ocorre nesses campos
                     $NewUser->Name = $UserData['name'];
                     $NewUser->Avatar = $UserData['avatar'];
+
 
                     $User->Followers[] = $NewUser;
                 }
@@ -93,7 +96,7 @@ class UserHandler
                 //Following
                 $Following = UserRelation::select()->where('user_from', $id)->get();
                 foreach ($Following as $Follower) {
-                    $UserData = User::select()->where('id', $Follower['user_from'])->get();
+                    $UserData = User::select()->where('id', $Follower['user_to'])->get();
                     $NewUser = new User();
                     $NewUser->Id = $UserData['id'];
                     $NewUser->Name = $UserData['name'];
@@ -141,5 +144,19 @@ class UserHandler
 
         return false;
         
+    }
+
+    public function Follow($From, $To){
+        UserRelation::insert([
+            'user_from' => $From,
+            'user_to' => $To
+        ])->execute();
+    }
+
+    public function Unfollow($From, $To){
+        UserRelation::delete()
+            ->where('user_from', $From)
+            ->where('user_to', $To)
+        ->execute();
     }
 }

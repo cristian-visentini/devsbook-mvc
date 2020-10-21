@@ -63,4 +63,24 @@ class ProfileController extends Controller {
             'IsFollowing' => $IsFollowing
         ]);
     }
+
+    public function Follow($att){
+        $To = intval($att['id']);
+
+        $Exists = UserHandler::IdExists($To);
+
+        if($Exists){
+            if(UserHandler::IsFollowing($this->LoggedUser->Id, $To)){
+                //deseguir
+                UserHandler::Unfollow($this->LoggedUser->Id, $To);
+
+            }else{
+                //seguir
+                UserHandler::Follow($this->LoggedUser->Id, $To);
+            }
+        }
+
+        $this->redirect('/perfil/'.$To);
+
+    }
 }
