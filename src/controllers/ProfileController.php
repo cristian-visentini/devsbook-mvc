@@ -83,4 +83,42 @@ class ProfileController extends Controller {
         $this->redirect('/perfil/'.$To);
 
     }
+
+    public function friends($Atts = []){
+
+        $id = $this->LoggedUser->Id;
+
+        if(!empty($Atts['id'])){
+            $id = $Atts['id'];
+        }
+       
+        //pegando informacoes do usuario
+
+        $User = UserHandler::GetUser($id, true);
+
+        if(!$User){
+            $this->redirect('/');
+        }
+
+        $DateFrom = new \DateTime($User->BirthDate);
+        $DateTo = new \DateTime('today');
+
+
+        $User->AgeYears = $DateFrom->diff($DateTo)->y;
+
+        //verificar se nao sigo o usuario
+
+        $IsFollowing = false;
+        if($User->Id != $this->LoggedUser->Id){
+            $IsFollowing = UserHandler::IsFollowing($this->LoggedUser->Id, $User->Id);
+
+        }
+
+        $this->render('profile_friends',[
+            'LoggedUser' => $this->LoggedUser,
+            'User' => $User,
+            'IsFollowing' => $IsFollowing
+        ]);
+
+    }
 }
