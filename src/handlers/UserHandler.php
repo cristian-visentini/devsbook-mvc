@@ -96,7 +96,7 @@ class UserHandler
                 //Following
                 $Following = UserRelation::select()->where('user_from', $id)->get();
                 foreach ($Following as $Follower) {
-                    $UserData = User::select()->where('id', $Follower['user_to'])->get();
+                    $UserData = User::select()->where('id', $Follower['user_to'])->one();
                     $NewUser = new User();
                     $NewUser->Id = $UserData['id'];
                     $NewUser->Name = $UserData['name'];
