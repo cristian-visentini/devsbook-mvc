@@ -226,15 +226,6 @@ class UserHandler
             ->where('id', $Id)
        ->execute();
        }
-       
-
-       /*
-       ->set('password' , $Hash)
-            ->set('name' , $Name)
-            ->set('birthdate' , $BirthDate)
-       
-       
-       */
 
     }
 }
