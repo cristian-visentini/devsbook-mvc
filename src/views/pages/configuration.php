@@ -22,16 +22,20 @@ exit;
                 <div class="flash"><?php echo $Flash; ?></div>
                 <?php endif; ?>
 
-                <form method="POST" action="<?= $base; ?>/configuration" enctype="multipart/form-data">
+                <form class="config-form" method="POST" action="<?= $base; ?>/configuration" enctype="multipart/form-data">
 
                     <label>
                         Nova foto: <br>
-                        <input type="file" name="cover">
+                        <input type="file" name="avatar">
+                        <br>
+                        <img class="image-edit" src="<?=$base;?>/media/avatars/<?=$User->Avatar;?>">
                     </label>
                     <br>
                     <label>
                         Nova Capa: <br>
-                        <input type="file" name="avatar">
+                        <input type="file" name="cover">
+                        <br>
+                        <img class="image-edit" src="<?=$base;?>/media/cover/<?=$User->Cover;?>">
                     </label>
                     <hr>
 
@@ -44,7 +48,7 @@ exit;
 
                     <label>
                         * Data de Nascimento: <br>
-                        <input type="text" id="birthdate" name="birthdate" value="<?=$User->BirthDate;?>">
+                        <input type="text" id="birthdate" name="birthdate" value="<?= date('d/m/Y', strtotime($User->BirthDate));?>">
                     </label>
 
                     <br>

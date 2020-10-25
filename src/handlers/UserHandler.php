@@ -82,9 +82,9 @@ class UserHandler
                 $Followers = UserRelation::select()->where('user_to', $id)->get();
                 foreach ($Followers as $Follower) {
                     $UserData = User::select()->where('id', $Follower['user_from'])->one();
-                    
+
                     $NewUser = new User();
-                   
+
                     $NewUser->Id = $UserData['id']; // o erro ocorre nesses campos
                     $NewUser->Name = $UserData['name'];
                     $NewUser->Avatar = $UserData['avatar'];
@@ -136,96 +136,120 @@ class UserHandler
         $Data = UserRelation::select()
             ->where('user_from', $From)
             ->where('user_to', $To)
-        ->one();
+            ->one();
 
-        if($Data){
+        if ($Data) {
             return true;
         }
 
         return false;
-        
     }
 
-    public function Follow($From, $To){
+    public function Follow($From, $To)
+    {
         UserRelation::insert([
             'user_from' => $From,
             'user_to' => $To
         ])->execute();
     }
 
-    public function Unfollow($From, $To){
+    public function Unfollow($From, $To)
+    {
         UserRelation::delete()
             ->where('user_from', $From)
             ->where('user_to', $To)
-        ->execute();
+            ->execute();
     }
 
-    public static function SearchUser($SearchTerm){
-        $Users=[];
-        $Data = User::select()->where('name', 'like', '%'.$SearchTerm.'%')->get();
+    public static function SearchUser($SearchTerm)
+    {
+        $Users = [];
+        $Data = User::select()->where('name', 'like', '%' . $SearchTerm . '%')->get();
 
-        if($Data){
-            foreach($Data as $User){
+        if ($Data) {
+            foreach ($Data as $User) {
                 $NewUser = new User();
                 $NewUser->Id = $User['id'];
                 $NewUser->Name = $User['name'];
                 $NewUser->Avatar = $User['avatar'];
 
-                $Users[] =$NewUser;
+                $Users[] = $NewUser;
             }
         }
 
 
         return $Users;
-
     }
 
-    public static function UpdateUser($Id, $Email, $Name, $BirthDate, $Password=false, $Work=false, $City=false){
-       if($Password){
-        $Hash = password_hash($Password, PASSWORD_DEFAULT);
-       }
+    public static function UpdateUser(
+        $Id,
+        $Email,
+        $Name,
+        $BirthDate,
+        $Password = false,
+        $Work = false,
+        $City = false,
+        $Cover_Name = false,
+        $Avatar_Name = false
+    ) {
+        if ($Password) {
+            $Hash = password_hash($Password, PASSWORD_DEFAULT);
+        }
 
-       if($Email){
-        User::update()
-            ->set('email' , $Email)
-            ->where('id', $Id)
-       ->execute();
-       }
+        if ($Email) {
+            User::update()
+                ->set('email', $Email)
+                ->where('id', $Id)
+                ->execute();
+        }
 
-       if($Name){
-        User::update()
-            ->set('name' , $Name)
-            ->where('id', $Id)
-       ->execute();
-       }
+        if ($Name) {
+            User::update()
+                ->set('name', $Name)
+                ->where('id', $Id)
+                ->execute();
+        }
 
-       if($Hash){
-        User::update()
-        ->set('password' , $Hash)
-            ->where('id', $Id)
-       ->execute();
-       }
+        if ($Hash) {
+            User::update()
+                ->set('password', $Hash)
+                ->where('id', $Id)
+                ->execute();
+        }
 
-       if($Work){
-        User::update()
-        ->set('work' , $Work)
-            ->where('id', $Id)
-       ->execute();
-       }
+        if ($Work) {
+            User::update()
+                ->set('work', $Work)
+                ->where('id', $Id)
+                ->execute();
+        }
 
-       if($BirthDate){
-        User::update()
-        ->set('birthdate' , $BirthDate)
-            ->where('id', $Id)
-       ->execute();
-       }
+        if ($BirthDate) {
+            User::update()
+                ->set('birthdate', $BirthDate)
+                ->where('id', $Id)
+                ->execute();
+        }
 
-       if($City){
-        User::update()
-        ->set('city' , $City)
-            ->where('id', $Id)
-       ->execute();
-       }
+        if ($City) {
+            User::update()
+                ->set('city', $City)
+                ->where('id', $Id)
+                ->execute();
+        }
 
+        if ($Cover_Name) {
+            User::update()
+                ->set('cover', $Cover_Name)
+                ->where('id', $Id)
+                ->execute();
+        }
+
+        if ($Avatar_Name) {
+            User::update()
+                ->set('avatar', $Avatar_Name)
+                ->where('id', $Id)
+                ->execute();
+        }
     }
 }
