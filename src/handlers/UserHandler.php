@@ -179,4 +179,62 @@ class UserHandler
         return $Users;
 
     }
+
+    public static function UpdateUser($Id, $Email, $Name, $BirthDate, $Password=false, $Work=false, $City=false){
+       if($Password){
+        $Hash = password_hash($Password, PASSWORD_DEFAULT);
+       }
+
+       if($Email){
+        User::update()
+            ->set('email' , $Email)
+            ->where('id', $Id)
+       ->execute();
+       }
+
+       if($Name){
+        User::update()
+            ->set('name' , $Name)
+            ->where('id', $Id)
+       ->execute();
+       }
+
+       if($Hash){
+        User::update()
+        ->set('password' , $Hash)
+            ->where('id', $Id)
+       ->execute();
+       }
+
+       if($Work){
+        User::update()
+        ->set('work' , $Work)
+            ->where('id', $Id)
+       ->execute();
+       }
+
+       if($BirthDate){
+        User::update()
+        ->set('birthdate' , $BirthDate)
+            ->where('id', $Id)
+       ->execute();
+       }
+
+       if($City){
+        User::update()
+        ->set('city' , $City)
+            ->where('id', $Id)
+       ->execute();
+       }
+       
+
+       /*
+       ->set('password' , $Hash)
+            ->set('name' , $Name)
+            ->set('birthdate' , $BirthDate)
+       
+       
+       */
+
+    }
 }
