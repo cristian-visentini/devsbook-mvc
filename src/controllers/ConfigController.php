@@ -119,14 +119,14 @@ class ConfigController extends Controller
 
     private function CutImage($File, $W, $H, $Folder){
         list($Width_origin, $Height_Origin) = getimagesize($File['tmp_name']);
-        $Ratio = $Width_origin/$Height_Origin;
+        $Ratio = $Width_origin / $Height_Origin;
 
         
 
         $New_Width = $W;
-        $New_Height = $New_Width/$Ratio;
+        $New_Height = $New_Width / $Ratio;
 
-        if($New_Height <$H){
+        if($New_Height < $H){
             $New_Height = $H;
             $New_Width = $New_Height * $Ratio;
         }
@@ -137,7 +137,8 @@ class ConfigController extends Controller
         $X = $X < 0 ? $X/2 : $X;
         $Y = $Y < 0 ? $Y/2 : $Y;
 
-        $FinalImage =  imagecreatetruecolor($X, $Y);
+        $FinalImage =  imagecreatetruecolor($W, $H); // o  bug era aqui estava passando $X e $Y ao inves de $W e $H
+
 
         switch($File['type']){
             case 'image/jpeg':
@@ -145,10 +146,13 @@ class ConfigController extends Controller
 
                 $Image = imagecreatefromjpeg($File['tmp_name']);
             break;
+            
             case 'image/png':
                 $Image = imagecreatefrompng($File['tmp_name']);
             break;
         }
+
+        
 
         imagecopyresampled(
             $FinalImage, $Image,
@@ -156,6 +160,7 @@ class ConfigController extends Controller
             $New_Width, $New_Height,
             $Width_origin, $Height_Origin
         );
+
 
         $FileName = md5(time().rand(0, 999)).'.jpg';
 

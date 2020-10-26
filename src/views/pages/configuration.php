@@ -35,7 +35,7 @@ exit;
                         Nova Capa: <br>
                         <input type="file" name="cover">
                         <br>
-                        <img class="image-edit" src="<?=$base;?>/media/cover/<?=$User->Cover;?>">
+                        <img class="image-edit" src="<?=$base;?>/media/covers/<?=$User->Cover;?>">
                     </label>
                     <hr>
 
