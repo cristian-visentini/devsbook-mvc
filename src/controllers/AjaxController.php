@@ -10,8 +10,7 @@ class AjaxController extends Controller {
     private $LoggedUser;
 
     public function __construct(){
-        echo "chegou no construct";
-        exit;
+        //router nao esta chegando no AjaxController, nao esta iniciando nem mesmo o construct
         $this->LoggedUser = UserHandler::CheckLogin();
 
         if($this->LoggedUser === false){
@@ -23,8 +22,7 @@ class AjaxController extends Controller {
     }
 
     public function like($atts) {
-        echo "chegou no like";
-        exit;
+        //$router->get não esta enviando para o metodo Like
         $Id = $atts['id'];
 
        

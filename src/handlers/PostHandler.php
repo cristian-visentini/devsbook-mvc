@@ -78,8 +78,8 @@ class PostHandler{
     }
 
     public static function DeleteLike($Id, $LoggedUserId){
-        echo "chegou no delete";
-        exit;
+        //Nao entra nesta função
+        
         PostLike::delete()
             ->where('id_post', $Id)
             ->where('id_user'. $LoggedUserId)
@@ -88,8 +88,7 @@ class PostHandler{
     }
 
     public static function AddLike($Id, $LoggedUserId){
-        echo "chegou no AddLike";
-        exit;
+        //Nao entra nesta função
 
         PostLike::insert([
             'id_post' => $Id,
