@@ -3,6 +3,7 @@ namespace src\handlers;
 use \core\Model;
 use \src\models\Post;
 use \src\models\PostLike;
+use \src\models\PostComment;
 use \src\models\User;
 use \src\models\UserRelation;
 
@@ -54,7 +55,10 @@ class PostHandler{
         $NewPost->Liked = self::IsLiked($PostItem['id'], $LoggedUserId);
 
         //prencher informações de coments
-        $NewPost->Coments = [];
+        $NewPost->Coments = PostComment::select()->where('id_post', $PostItem['id'])->get();
+        foreach($NewPost->Coments as $Key => $Coment){
+            $NewPost->Coments[$Key]['user'] = User::select()->where('id', $Coment['id_user'])->one();
+        }
 
 
         $Posts[] = $NewPost;
@@ -78,18 +82,16 @@ class PostHandler{
     }
 
     public static function DeleteLike($Id, $LoggedUserId){
-        //Nao entra nesta função
-        
+    
         PostLike::delete()
             ->where('id_post', $Id)
-            ->where('id_user'. $LoggedUserId)
+            ->where('id_user', $LoggedUserId) // o erro estava nesta linha, havia colocado ponto ao inves de , para separar id_user de $loggedUserId
         ->execute();
 
     }
 
     public static function AddLike($Id, $LoggedUserId){
-        //Nao entra nesta função
-
+      
         PostLike::insert([
             'id_post' => $Id,
             'id_user' => $LoggedUserId,

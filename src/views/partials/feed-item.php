@@ -2,10 +2,10 @@
     <div class="box-body">
         <div class="feed-item-head row mt-20 m-width-20">
             <div class="feed-item-head-photo">
-                <a href=""><img src="<?=$base;?>/media/avatars/<?= $data->User->Avatar; ?>" /></a>
+                <a href="<?=$base;?>/perfil/<?=$data->User->Id?>"><img src="<?=$base;?>/media/avatars/<?= $data->User->Avatar; ?>" /></a>
             </div>
             <div class="feed-item-head-info">
-                <a href=""><span class="fidi-name"><?= $data->User->Name; ?></span></a>
+                <a href="<?=$base;?>/perfil/<?=$data->User->Id?>"><span class="fidi-name"><?= $data->User->Name; ?></span></a>
                 <span class="fidi-action"><?php 
                 switch($data->Type){
                     case 'text':
@@ -32,23 +32,26 @@
         </div>
         <div class="feed-item-comments">
 
-        <!--
+        <?php foreach($data->Coments as $Item):?>
+
+        
             <div class="fic-item row m-height-10 m-width-20">
                 <div class="fic-item-photo">
-                    <a href=""><img src="media/avatars/avatar.jpg" /></a>
+                    <a href="<?=$base;?>/perfil/<?=$Item['user']['id']?>"><img src="<?=$base;?>/media/avatars/<?=$Item['user']['avatar']?>" /></a>
                 </div>
                 <div class="fic-item-info">
-                    <a href="">Bonieky Lacerda</a>
-                    Comentando no meu próprio post
+                    <a href="<?=$base;?>/perfil/<?=$Item['user']['id']?>"><?=$Item['user']['name']?></a>
+                    <?=$Item['body'];?>
                 </div>
             </div>
 
-            -->
+            
+        <?php endforeach;?>
            
 
             <div class="fic-answer row m-height-10 m-width-20">
                 <div class="fic-item-photo">
-                    <a href=""><img src="<?=$base;?>/media/avatars/<?=$LoggedUser->Avatar?>" /></a>
+                    <a href="<?=$base;?>/perfil/<?=$data->User->Id?>"><img src="<?=$base;?>/media/avatars/<?=$LoggedUser->Avatar?>" /></a>
                 </div>
                 <input type="text" class="fic-item-field" placeholder="Escreva um comentário" />
             </div>
