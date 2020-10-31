@@ -23,13 +23,31 @@ class AjaxController extends Controller {
     public function like($atts) {
         $Id = $atts['id'];
 
-       
-
         if(PostHandler::IsLiked($Id, $this->LoggedUser->Id)){
             PostHandler::DeleteLike($Id, $this->LoggedUser->Id);
         }else{
             PostHandler::AddLike($Id, $this->LoggedUser->Id);
         }
 
+    }
+
+    public function comment(){
+        $Array = ['error' => ''];
+        $Id = filter_input(INPUT_POST, 'id');
+        $Txt = filter_input(INPUT_POST, 'txt');
+
+
+        if($Id && $Txt){
+            PostHandler::AddComent($Id, $Txt, $this->LoggedUser->Id);
+
+            $Array['link'] = '/perfil/'.$this->LoggedUser->Id;
+            $Array['avatar'] = '/media/avatars/'.$this->LoggedUser->Avatar;
+            $Array['name'] = $this->LoggedUser->Name;
+            $Array['body'] = $Txt;
+        }
+
+        header("Content-Type: application/json");
+        echo json_encode($Array);
+        exit;
     }
 }

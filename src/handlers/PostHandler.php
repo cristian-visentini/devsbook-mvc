@@ -99,6 +99,17 @@ class PostHandler{
         ])->execute();
     }
 
+
+    public static function AddComent($Id, $Txt, $LoggedUser){
+
+        PostComment::insert([
+            'id_post' => $Id,
+            'id_user' => $LoggedUser,
+            'created_at' => date('Y-m-d H:i:s'),
+            'body' => $Txt
+        ])->execute();
+    }
+
     public static function GetUserFeed($IdUser, $Page, $LoggedUserId){
         $PerPage = 2;
         // pegar posts ordenados por data
