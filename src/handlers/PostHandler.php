@@ -211,12 +211,18 @@ class PostHandler
 
             PostLike::delete()->where('id_post', $Id)->execute();
             PostComment::delete()->where('id_post', $Id)->execute();
+
+            //se foto deletar arquivo tambem
+
+            if($Post['type'] === 'photo'){
+                $Img = __DIR__.'/../../public/media/uploads/'.$Post['body'];
+                if(file_exists($Img)){
+                    unlink($Img);
+                }
+            }
         }
 
-        //deletar likes e comments
-
-        //se foto deletar arquivo tambem
-
         //deletar o post de fato
+        Post::delete()->where('id', $Id)->execute();
     }
 }

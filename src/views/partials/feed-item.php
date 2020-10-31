@@ -34,7 +34,7 @@
             <?php
             switch ($data->Type) {
                 case 'text':
-                    nl2br($data->Body);
+                    echo nl2br($data->Body);
                     break;
                 case 'photo':
                     echo '<img src="' . $base . '/media/uploads/' . $data->Body . '" />';
