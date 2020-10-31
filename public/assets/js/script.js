@@ -45,6 +45,27 @@ document.querySelector('.feed-new-input').addEventListener('blur', function (obj
     }
 });
 
+function CloseFeedWindow(){
+    document.querySelectorAll('.feed-item-more-window').forEach(item=>{
+item.style.display = 'none';
+    });
+
+    document.removeEventListener('click', CloseFeedWindow);
+}
+
+document.querySelectorAll(".feed-item-head-btn").forEach(item=>{
+    item.addEventListener('click', ()=>{
+        CloseFeedWindow();
+        item.querySelector('.feed-item-more-window').style.display = 'block';
+
+        setTimeout(()=>{
+            document.addEventListener('click', CloseFeedWindow);
+        }, 500)
+        
+
+    });
+});
+
 if (document.querySelector('.like-btn')) {
     document.querySelectorAll('.like-btn').forEach(item => {
         item.addEventListener('click', () => {

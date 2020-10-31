@@ -1,6 +1,4 @@
-.feed-item {
 
-}
 .feed-item-head {
     align-items: center;
 }
@@ -35,6 +33,28 @@
 .feed-item-head-btn img {
     width:20px;
     height:20px;
+}
+
+.feed-item-more-window{
+    position: absolute;
+    background-color: #FFF;
+    width: 150px;
+    padding: 5px;
+    border: 1px solid #EEE;
+    border-radius: 3px;
+    margin-left: -130px;
+    display: none;
+}
+
+.feed-item-more-window a{
+    display: block;
+    padding: 7px;
+    color: #000;
+    text-decoration: none;
+}
+
+.feed-item-more-window a:hover{
+    background-color: #CCC;
 }
 
 .feed-item-body {

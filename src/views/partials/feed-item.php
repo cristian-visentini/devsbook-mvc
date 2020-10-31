@@ -20,9 +20,15 @@
                 <br />
                 <span class="fidi-date"><?php date('d/m/Y', strtotime($data->Created_At)) ?></span>
             </div>
+
+           <?php if($data->Mine):?>
             <div class="feed-item-head-btn">
                 <img src="<?= $base; ?>/assets/images/more.png" />
+                <div class="feed-item-more-window">
+                    <a href="<?=$base;?>/post/<?=$data->Id;?>/delete">Excluir Post</a>
+                </div>
             </div>
+           <?php endif;?>
         </div>
         <div class="feed-item-body mt-10 m-width-20">
             <?php
