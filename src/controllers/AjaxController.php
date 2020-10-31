@@ -98,22 +98,15 @@ class AjaxController extends Controller
                     $WidthOrig, $HeightOrig
                 );
 
-
                 $PhotoName = md5(time().rand(0, 999)).'.jpg';
                 imagejpeg($FinalImage, 'media/uploads/'.$PhotoName);
 
                 PostHandler::AddPost($this->LoggedUser->Id, 'photo', $PhotoName);
 
-
-
-
             }
         } else {
             $Array['error'] = 'Nenhuma imagem enviada';
         }
-
-
-
 
         header("Content-Type: application/json");
         echo json_encode($Array);

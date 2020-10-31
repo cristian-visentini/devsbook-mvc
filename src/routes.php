@@ -12,6 +12,7 @@ $router->get('/cadastro', 'LoginController@singnup');
 $router->post('/cadastro', 'LoginController@singnupAction');
 
 $router->post('/post/new', 'PostController@new');
+$router->post('/post/{id}/delete', 'PostController@delete');
 
 $router->get('/perfil/{id}/amigos', 'ProfileController@friends');
 
