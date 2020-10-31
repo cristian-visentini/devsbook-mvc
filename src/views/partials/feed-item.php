@@ -6,16 +6,17 @@
             </div>
             <div class="feed-item-head-info">
                 <a href="<?= $base; ?>/perfil/<?= $data->User->Id ?>"><span class="fidi-name"><?= $data->User->Name; ?></span></a>
-                <span class="fidi-action"><?php
-                                            switch ($data->Type) {
-                                                case 'text':
-                                                    echo ' Fez um Post';
-                                                    break;
-                                                case 'photo':
-                                                    echo ' Postou uma foto';
-                                                    break;
-                                            }
-                                            ?></span>
+                <span class="fidi-action">
+                    <?php
+                    switch ($data->Type) {
+                        case 'text':
+                            echo ' Fez um Post';
+                            break;
+                        case 'photo':
+                            echo ' Postou uma foto';
+                            break;
+                    }
+                    ?></span>
                 <br />
                 <span class="fidi-date"><?php date('d/m/Y', strtotime($data->Created_At)) ?></span>
             </div>
@@ -24,7 +25,16 @@
             </div>
         </div>
         <div class="feed-item-body mt-10 m-width-20">
-            <?= nl2br($data->Body); ?>
+            <?php
+            switch ($data->Type) {
+                case 'text':
+                    nl2br($data->Body);
+                    break;
+                case 'photo':
+                    echo '<img src="' . $base . '/media/uploads/' . $data->Body . '" />';
+                    break;
+            }
+            ?>
         </div>
         <div class="feed-item-buttons row mt-20 m-width-20">
             <div class="like-btn <?= ($data->Liked ? 'on' : '') ?>"><?= $data->LikeCount; ?></div>
@@ -33,7 +43,7 @@
         <div class="feed-item-comments">
 
             <div class="feed-item-comments-area">
-            
+
                 <?php foreach ($data->Coments as $Item) : ?>
 
                     <div class="fic-item row m-height-10 m-width-20">
